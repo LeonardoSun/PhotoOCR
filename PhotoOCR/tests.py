@@ -57,6 +57,11 @@ for y_index in level_2_cortex.shape[1]:
                 content.append(x_index, y_index)
 
 def Map(content):
+    # read sequence
+    # like 'right, right, down, down_right..'
+    # this sequence should be the same with the structure as we learn
+    # thus, there is no subfield.
+    # because the character is written by a single sequence.
     pass
 
 # connect content (record related pattern)
