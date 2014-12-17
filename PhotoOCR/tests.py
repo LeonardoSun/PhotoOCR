@@ -4,7 +4,7 @@ Created on 2014年12月14日
 
 @author: leonardo
 '''
-from Source.neurals.cortex import Cortex, NeuralRelation
+from Source.neurals.cortex import Cortex, NeuralRelationXY
 from Source.neurals.indexable import NestingArrayIndexable
 
 training_data_dic={}
@@ -26,16 +26,18 @@ def load_data():
 
 load_data()
 
-level_1_cortex = Cortex(NestingArrayIndexable(training_data_dic[0], training_data_shape))
+level_1_cortex = Cortex(training_data_shape)
+level_1_cortex.load(NestingArrayIndexable(training_data_dic[0], training_data_shape))
 
 level_2_data = []
 for y in range(level_1_cortex.shape):
     row = []
     for x in range(level_1_cortex.shape):
-        row.append(NeuralRelation(level_1_cortex, x, y))
+        row.append(NeuralRelationXY(level_1_cortex, x, y))
     level_2_data.append(row)
     
-level_2_cortex = Cortex(NestingArrayIndexable(level_2_data, level_1_cortex.shape))
+level_2_cortex = Cortex(level_1_cortex.shape)
+level_2_cortex.load(NestingArrayIndexable(level_2_data, level_1_cortex.shape))
 
 content = []
 for y_index in level_2_cortex.shape[1]:
